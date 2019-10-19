@@ -1,0 +1,14 @@
+<h1>Scraping Marmiton Results</h1>
+
+<% @results.each do |r| %>
+  <h1><%= r.name %></h1> <h3>(<%= r.prep_time %> | <%= r.difficulty %>)</h3>
+  <p><%= r.description %></p>
+
+  <form action="/recipes" method="post">
+    <input type="hidden" name="name" id="name" value="<%= r.name %>">
+    <input type="hidden" name="description" id="description" value="<%= r.description %>">
+    <input type="hidden" name="prep_time" id="prep_time" value="<%= r.prep_time %>">
+    <input type="hidden" name="difficulty" id="difficulty" value="<%= r.difficulty %>">
+    <input type="submit" value="Choose">
+  </form>
+<% end %>

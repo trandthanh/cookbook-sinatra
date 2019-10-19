@@ -1,0 +1,42 @@
+<h1>List of Recipes:</h1>
+<ul>
+  <% @recipes.each_with_index do |recipe, index| %>
+    <li>
+      <div>
+
+          <% if recipe.done? %>
+            <h1>Done</h1>
+          <% else %>
+            <h1>Not done</h1>
+            <form action="/recipes/<%= index %>" method="patch">
+              <input name="marker" id="marker" value="not done" hidden>
+              <input type="submit" value="Mark as done?">
+            </form>
+          <% end %>
+
+        <h2>
+          <a href="/recipes/<%= index %>"><%= recipe.name %></a>
+          (<%= recipe.prep_time %> | <%= recipe.difficulty %>)
+        </h2>
+        <p><%= recipe.description %></p>
+        <form action="/recipes/<%= index %>" method="get">
+          <input type="text" name="status" id="status" value="ok" hidden>
+          <input type="submit" value="Destroy!">
+        </form>
+        <!--  <a href="/recipes/<%#= index %>"></a> -->
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<a href="/recipes/new">Add a recipe</a>
+
+<hr>
+
+<form action="/result" method="get">
+  <label for="name">Ingredient:</label>
+  <input type="text" name="ingredient" id="ingredient">
+  <input type="submit" value="Scrape Marmiton">
+</form>
